@@ -1,0 +1,137 @@
+/* Основные стили для светлой темы */
+
+body.light-theme {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.header {
+  background-color: #f5f5f5;
+  color: #333333;
+}
+
+.header--logo img {
+  filter: brightness(1) invert(0);
+}
+
+.device-notification {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+.device-notification--message {
+  color: #333333;
+}
+
+.l-side-nav {
+  background-color: #f9f9f9;
+}
+
+.side-nav li.is-active span {
+  color: #333333;
+}
+
+.side-nav li span {
+  color: #666666;
+}
+
+.intro--banner {
+  background-color: #f0f0f0;
+  color: #333333;
+}
+
+.intro--options a {
+  color: #007bff;
+}
+
+.work {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.slider--item-title {
+  color: #007bff;
+}
+
+.slider--item-description {
+  color: #666666;
+}
+
+.cta {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.cta:hover {
+  background-color: #0056b3;
+}
+
+/* Основные стили для тёмной темы */
+
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.header {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+.header--logo img {
+  filter: brightness(0.8) invert(1);
+}
+
+.device-notification {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+}
+
+.device-notification--message {
+  color: #e0e0e0;
+}
+
+.l-side-nav {
+  background-color: #1c1c1c;
+}
+
+.side-nav li.is-active span {
+  color: #ffffff;
+}
+
+.side-nav li span {
+  color: #b0b0b0;
+}
+
+.intro--banner {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+}
+
+.intro--options a {
+  color: #1e90ff;
+}
+
+.work {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.slider--item-title {
+  color: #1e90ff;
+}
+
+.slider--item-description {
+  color: #b0b0b0;
+}
+
+.cta {
+  background-color: #1e90ff;
+  color: #ffffff;
+}
+
+.cta:hover {
+  background-color: #007acc;
+}
+
+  

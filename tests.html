@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тесты по математике и английскому языку</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #0c0c0c;
+            color: #e0e0e0;
+        }
+        header {
+            background: #0c0c0c;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 1em;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+        }
+        footer {
+            background: 0c0c0c;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 1em;
+        }
+        label {
+            display: block;
+            margin-bottom: .5em;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: .5em;
+            margin: .2em 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #1f1f1f;
+            color: #e0e0e0;
+        }
+        button {
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #444;
+        }
+        .section {
+            margin-bottom: 2em;
+        }
+        .test-header {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+        .test-question {
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="header--logo" href="#0">
+            <img src="assets/img/logo.png" 
+            style="width:150px;"
+            alt="Global">
+            <script src="assets/js/functions-min.js"></script>
+          </a>
+        <h1>Добро пожаловать на сайт тестов по математике и английскому языку!</h1>
+        <nav>
+            <ul>
+                <li><a style = "background-color:rgb(50, 9, 255);" href="#" onclick="showSection('home')">Главная</a></li>
+                <li><a style = "background-color:rgb(50, 9, 255);" href="#" onclick="showSection('math')">Тесты по математике</a></li>
+                <li><a style = "background-color:rgb(50, 9, 255);" href="#" onclick="showSection('english')">Тесты по английскому языку</a></li>
+                <li><a style = "background-color:rgb(50, 9, 255)" href="#" onclick="showSection('contact')">Контакт</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Главная страница -->
+        <div id="home" class="section">
+            <h2>Наши тесты помогут вам улучшить знания в математике и английском языке.</h2>
+            <p>Выбирайте тест и проверяйте свои навыки!</p>
+        </div>
+
+        <!-- Тесты по математике -->
+        <div id="math" class="section hidden">
+            <h2>Выберите тест по математике:</h2>
+            <ul>
+                <li><a href="#" onclick="startMathTest(1)">Тест 1: Основы арифметики</a></li>
+                <li><a href="#" onclick="startMathTest(2)">Тест 2: Алгебра</a></li>
+                <li><a href="#" onclick="startMathTest(3)">Тест 3: Геометрия</a></li>
+            </ul>
+        </div>
+
+        <!-- Тесты по английскому языку -->
+        <div id="english" class="section hidden">
+            <h2>Выберите тест по английскому языку:</h2>
+            <ul>
+                <li><a href="#" onclick="startEnglishTest(1)">Тест 1: Основы грамматики</a></li>
+                <li><a href="#" onclick="startEnglishTest(2)">Тест 2: Лексика</a></li>
+                <li><a href="#" onclick="startEnglishTest(3)">Тест 3: Чтение и понимание текста</a></li>
+            </ul>
+        </div>
+
+        <!-- Контактная информация -->
+        <div id="contact" class="section hidden">
+            <h2>Свяжитесь с нами</h2>
+            <form id="contact-form" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+
+        <!-- Тесты по математике -->
+        <div id="math-test-1" class="section hidden">
+            <div class="test-header">Тест 1: Основы арифметики</div>
+            <form id="math-test-form-1" onsubmit="submitMathTest1(event)">
+                <div class="form-group test-question">
+                    <p>1. Сколько будет 5 + 7?</p>
+                    <input type="text" name="q1" required>
+                </div>
+                <div class="form-group test-question">
+                    <p>2. Какой результат 12 - 4?</p>
+                    <input type="text" name="q2" required>
+                </div>
+                <button type="submit">Отправить ответы</button>
+            </form>
+        </div>
+
+        <div id="math-test-2" class="section hidden">
+            <div class="test-header">Тест 2: Алгебра</div>
+            <form id="math-test-form-2" onsubmit="submitMathTest2(event)">
+                <div class="form-group test-question">
+                    <p>1. Решите уравнение: x + 3 = 7</p>
+                    <input type="text" name="q1" required>
+                </div>
+                <div class="form-group test-question">
+                    <p>2. Что такое производная от функции f(x) = x²?</p>
+                    <input type="text" name="q2" required>
+                </div>
+                <button type="submit">Отправить ответы</button>
+            </form>
+        </div>
+
+        <div id="math-test-3" class="section hidden">
+            <div class="test-header">Тест 3: Геометрия</div>
+            <form id="math-test-form-3" onsubmit="submitMathTest3(event)">
+                <div class="form-group test-question">
+                    <p>1. Какова площадь квадрата со стороной 5?</p>
+                    <input type="text" name="q1" required>
+                </div>
+                <div class="form-group test-question">
+                    <p>2. Найдите периметр треугольника со сторонами 3, 4 и 5.</p>
+                    <input type="text" name="q2" required>
+                </div>
+                <button type="submit">Отправить ответы</button>
+            </form>
+        </div>
+
+        <!-- Тесты по английскому языку -->
+        <div id="english-test-1" class="section hidden">
+            <div class="test-header">Тест 1: Основы грамматики</div>
+            <form id="english-test-form-1" onsubmit="submitEnglishTest1(event)">
+                <div class="form-group test-question">
+                    <p>1. Какой правильный вариант: She (go/goes) to school every day?</p>
+                    <input type="text" name="q1" required>
+                </div>
+                <div class="form-group test-question">
+                    <p>2. Какой правильный вариант: I (am/is) a student?</p>
+                    <input type="text" name="q2" required>
+                </div>
+                <button type="submit">Отправить ответы</button>
+            </form>
+        </div>
+
+        <div id="english-test-2" class="section hidden">
+            <div class="test-header">Тест 2: Лексика</div>
+            <form id="english-test-form-2" onsubmit="submitEnglishTest2(event)">
+                <div class="form-group test-question">
+                    <p>1. Что значит слово "apple"?</p>
+                    <input type="text" name="q1" required>
+                </div>
+                <div class="form-group test-question">
+                    <p>2. Какой перевод слова "book"?</p>
+                    <input type="text" name="q2" required>
+                </div>
+                <button type="submit">Отправить ответы</button>
+            </form>
+        </div>
+
+        <div id="english-test-3" class="section hidden">
+            <div class="test-header">Тест 3: Чтение и понимание текста</div>
+            <form id="english-test-form-3" onsubmit="submitEnglishTest3(event)">
+                <div class="form-group test-question">
+                    <p>1. Прочитайте текст и ответьте на вопросы:</p>
+                    <p><strong>Текст:</strong> The quick brown fox jumps over the lazy dog.</p>
+                    <p><strong>Вопрос:</strong> What color is the fox?</p>
+                    <input type="text" name="q1" required>
+                </div>
+                <div class="form-group test-question">
+                    <p>2. Какое действие выполняет лиса?</p>
+                    <input type="text" name="q2" required>
+                </div>
+                <button type="submit">Отправить ответы</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Тесты по математике и английскому языку. Все права защищены.</p>
+    </footer>
+    <script>
+        function showSection(sectionId) {
+            // Скрыть все секции
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // Показать выбранную секцию
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function startMathTest(testNumber) {
+            showSection('math-test-' + testNumber);
+        }
+
+        function startEnglishTest(testNumber) {
+            showSection('english-test-' + testNumber);
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            alert('Форма отправлена!');
+        }
+
+        function submitMathTest1(event) {
+            event.preventDefault();
+            alert('Ответы на тест 1 по математике отправлены!');
+        }
+
+        function submitMathTest2(event) {
+            event.preventDefault();
+            alert('Ответы на тест 2 по математике отправлены!');
+        }
+
+        function submitMathTest3(event) {
+            event.preventDefault();
+            alert('Ответы на тест 3 по математике отправлены!');
+        }
+
+        function submitEnglishTest1(event) {
+            event.preventDefault();
+            alert('Ответы на тест 1 по английскому языку отправлены!');
+        }
+
+        function submitEnglishTest2(event) {
+            event.preventDefault();
+            alert('Ответы на тест 2 по английскому языку отправлены!');
+        }
+
+        function submitEnglishTest3(event) {
+            event.preventDefault();
+            alert('Ответы на тест 3 по английскому языку отправлены!');
+        }
+
+        // Показываем главную секцию при загрузке
+        showSection('home');
+    </script>
+</body>
+</html>

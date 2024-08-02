@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            padding: 10px;
+            text-align: center;
+        }
+        header img {
+            height: auto;
+        }
+        #forum-header {
+            text-align: center;
+            font-size: 48px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #make-post-button {
+            display: block;
+            margin: 40px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .post {
+            border: 1px solid #444;
+            padding: 10px;
+            margin: 10px;
+        }
+        .post-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .post-username, .post-date {
+            font-size: 12px;
+            color: #777;
+        }
+        .post-content {
+            margin-top: 10px;
+        }
+        .reply-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .reply-form {
+            display: none;
+            margin-top: 10px;
+        }
+        .reply {
+            margin-left: 20px;
+            border-left: 2px solid #444;
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+        #new-post-form {
+            display: none;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #444;
+        }
+        #publish-button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="assets/img/logo.png" style="width:150px;" alt="Global">
+        <h1>Mentors</h1>
+    </header>
+    <div id="forum-header">Forum</div>
+    <button id="make-post-button">Make a Post</button>
+
+    <div id="new-post-form">
+        <h3>New Post</h3>
+        <label for="post-title">Title:</label><br>
+        <input type="text" id="post-title" name="post-title"><br><br>
+        <label for="post-username">Username:</label><br>
+        <input type="text" id="post-username" name="post-username"><br><br>
+        <input type="hidden" id="post-date" name="post-date"><br>
+        <label for="post-content">Content:</label><br>
+        <textarea id="post-content" name="post-content" rows="4" cols="50"></textarea><br><br>
+        <button id="publish-button">Publish</button>
+    </div>
+
+    <div id="posts-list">
+        <!-- Posts will be dynamically added here -->
+    </div>
+
+    <script>
+        document.getElementById('make-post-button').addEventListener('click', function() {
+            document.getElementById('new-post-form').style.display = 'block';
+        });
+
+        document.getElementById('publish-button').addEventListener('click', function() {
+            const title = document.getElementById('post-title').value;
+            const username = document.getElementById('post-username').value;
+            const date = new Date().toLocaleDateString();
+            const content = document.getElementById('post-content').value;
+
+            if (title && username && content) {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+
+                const postTitle = document.createElement('div');
+                postTitle.classList.add('post-title');
+                postTitle.textContent = title;
+                postDiv.appendChild(postTitle);
+
+                const postUsername = document.createElement('div');
+                postUsername.classList.add('post-username');
+                postUsername.textContent = 'Posted by: ${username}';
+                postDiv.appendChild(postUsername);
+
+                const postDate = document.createElement('div');
+                postDate.classList.add('post-date');
+                postDate.textContent = 'Date: ${date}';
+                postDiv.appendChild(postDate);
+
+                const postContent = document.createElement('div');
+                postContent.classList.add('post-content');
+                postContent.textContent = content;
+                postDiv.appendChild(postContent);
+
+                const replyButton = document.createElement('button');
+                replyButton.classList.add('reply-button');
+                replyButton.textContent = 'Reply';
+                replyButton.addEventListener('click', function() {
+                    const replyForm = postDiv.querySelector('.reply-form');
+                    replyForm.style.display = replyForm.style.display === 'block' ? 'none' : 'block';
+                });
+                postDiv.appendChild(replyButton);
+
+                const replyForm = document.createElement('div');
+                replyForm.classList.add('reply-form');
+                replyForm.innerHTML = `
+                    <label for="reply-username">Username:</label><br>
+                    <input type="text" name="reply-username" class="reply-username"><br><br>
+                    <label for="reply-content">Reply:</label><br>
+                    <textarea name="reply-content" class="reply-content" rows="2" cols="40"></textarea><br><br>
+                    <button class="publish-reply-button">Publish Reply</button>
+                `;
+                postDiv.appendChild(replyForm);
+
+                replyForm.querySelector('.publish-reply-button').addEventListener('click', function() {
+                    const replyUsername = replyForm.querySelector('.reply-username').value;
+                    const replyContent = replyForm.querySelector('.reply-content').value;
+                    const replyDate = new Date().toLocaleDateString();
+
+                    if (replyUsername && replyContent) {
+                        const replyDiv = document.createElement('div');
+                        replyDiv.classList.add('reply');
+
+                        const replyUsernameDiv = document.createElement('div');
+                        replyUsernameDiv.classList.add('post-username');
+                        replyUsernameDiv.textContent = 'Replied by: ${replyUsername}';
+                        replyDiv.appendChild(replyUsernameDiv);
+
+                        const replyDateDiv = document.createElement('div');
+                        replyDateDiv.classList.add('post-date');
+                        replyDateDiv.textContent = 'Date: ${replyDate}';
+                        replyDiv.appendChild(replyDateDiv);
+
+                        const replyContentDiv = document.createElement('div');
+                        replyContentDiv.classList.add('post-content');
+                        replyContentDiv.textContent = replyContent;
+                        replyDiv.appendChild(replyContentDiv);
+
+                        postDiv.appendChild(replyDiv);
+
+                        // Clear the reply form
+                        replyForm.querySelector('.reply-username').value = '';
+                        replyForm.querySelector('.reply-content').value = '';
+                        replyForm.style.display = 'none';
+                    } else {
+                        alert('Please fill out all fields.');
+                    }
+                });
+
+                document.getElementById('posts-list').appendChild(postDiv);
+
+                // Clear the form
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-username').value = '';
+                document.getElementById('post-content').value = '';
+                document.getElementById('new-post-form').style.display = 'none';
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
